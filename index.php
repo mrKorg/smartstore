@@ -3,6 +3,10 @@
 session_start();
 //session_destroy();
 
+if ($_SESSION["id"] != ''){
+    header('Location: profile.php');
+}
+
 ?>
 
 <!doctype html>
@@ -33,9 +37,6 @@ session_start();
                     </form>
                     <form method="post" id="form-login" class="form" style="display: none;">
                         <h3>Авторизоваться</h3>
-<!--                        --><?php // if($wrong): ?>
-<!--                            <p class="form_text">Неверный логин или пароль</p>-->
-<!--                        --><?php //endif; ?>
                         <p class="form_text message" style="display: none;"></p>
                         <p><input type="text" placeholder="Логин или Email" name="login" required></p>
                         <p><input type="password" placeholder="Введите пароль" name="password" required></p>

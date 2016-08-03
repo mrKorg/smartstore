@@ -27,7 +27,17 @@ jQuery(document).ready(function ($) {
                     $("#form-login .message").hide(200).text();
                 }, 4000);
             } else if(result == "unsuccessful_reg"){
-                $("#form-reg .message").show(200).text("Неверные данные для регистрации!");
+                $("#form-reg .message").show(200).text("Такой логин или пароль уже существует!");
+                setTimeout(function () {
+                    $("#form-reg .message").hide(200).text();
+                }, 4000);
+            } else if(result == "not_valid_login"){
+                $("#form-reg .message").show(200).text("Неверный логин!");
+                setTimeout(function () {
+                    $("#form-reg .message").hide(200).text();
+                }, 4000);
+            } else if(result == "not_valid_email"){
+                $("#form-reg .message").show(200).text("Неверный email!");
                 setTimeout(function () {
                     $("#form-reg .message").hide(200).text();
                 }, 4000);
@@ -37,27 +47,47 @@ jQuery(document).ready(function ($) {
     });
 
    $("#form-login").submit(function (e) {
-       var form = $(this);
-       $.post('logic.php', form).done(function(result) {
+       var form = $(this).serializeArray();
+       $.post('logic.php', form).done(function(result){
            if(result == "unsuccessful_log"){
-               $("#form-login .message").show(100).text("Неверные данные для авторизации!");
+               $("#form-login .message").show(200).text("Неверные данные для авторизации!");
+               setTimeout(function () {
+                   $("#form-login .message").hide(200).text();
+               }, 4000);
+           } else if(result == "not_valid_login"){
+               $("#form-login .message").show(200).text("Неверный логин!");
+               setTimeout(function () {
+                   $("#form-login .message").hide(200).text();
+               }, 4000);
+           } else if(result == "success_log"){
+               // $(location).attr('href', "profile.php");
+               window.location = "profile.php";
            }
        });
        e.preventDefault();
    });
 
-   $("#logout").submit(function (e) {
-       var form = $(this);
-       $.ajax({
-           type: form.attr('method'),
-           url: form.attr('action'),
-           data: form.serializeArray(),
-           success: function (data){
-               $("#content").html(data);
-           }
-       });
-       e.preventDefault();
-   });
+    $("#form-add-prod").submit(function (e) {
+        var form = $(this).serializeArray();
+        $.post('../logic.php', form).done(function(result) {
+            if(result == "success_add"){
+                window.location = "index.php?page=products";
+            }
+        });
+        e.preventDefault();
+    });
+
+    $("#form-delete-prod").submit(function (e) {
+        var form = $(this).serializeArray();
+        $.post('../logic.php', form).done(function(result){
+            if(result == "success_delete"){
+                window.location = "index.php?page=delete_product";
+            }
+        });
+        e.preventDefault();
+    });
+
+    
 
 
 });

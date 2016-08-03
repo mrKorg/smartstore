@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 header("Content-Type: text/html; charset=utf-8");
 $siteUrl = $_SERVER[SERVER_NAME].$_SERVER[SCRIPT_NAME];
 $postArr = $_POST;
@@ -12,8 +14,6 @@ if($_SESSION['id'] != ""){
 
 if(isset($_POST["registration"])){
 
-
-
     // User
     $login = trim($_POST["login"]);
     $email = trim($_POST["email"]);
@@ -23,11 +23,13 @@ if(isset($_POST["registration"])){
     if(is_string($login) && $login != "" && preg_match("#^[aA-zZ0-9\-_]+$#",$login)){
         $login = strip_tags($login);
     } else {
+        echo "not_valid_login";
         exit();
     }
 
     // Проверка email
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        echo "not_valid_email";
         exit();
     }
 
@@ -40,11 +42,9 @@ if(isset($_POST["registration"])){
     } else {
         echo "unsuccessful_reg";
     }
-
-
+    
     // Закрытие подлючения
     echo $mysqli->close;
-
 }
 
 
@@ -57,11 +57,13 @@ if(isset($_POST["enter"])){
     // Проверка email
     if(filter_var($login, FILTER_VALIDATE_EMAIL)){
         $loginType = true;
+        echo "$loginType";
     } else {
         // Проверка логина
         if(is_string($login) && $login != "" && preg_match("#^[aA-zZ0-9\-_]+$#",$login)){
             $login = strip_tags($login);
         } else {
+            echo "not_valid_login";
             exit();
         }
     }
@@ -80,7 +82,7 @@ if(isset($_POST["enter"])){
     }
     if(mysqli_num_rows($sqlSelect) == 1){
         $_SESSION['id'] = $login; // Создание сессии
-        header('Location: profile.php');
+        echo "success_log";
     } else {
         echo "unsuccessful_log";
     }
@@ -88,4 +90,48 @@ if(isset($_POST["enter"])){
     // Закрытие подлючения
     echo $mysqli->close;
 
-} 
+}
+
+
+if(isset($_POST["add_product"])){
+
+    // Product
+    $name = trim($_POST["name"]);
+    $description = trim($_POST["description"]);
+    $content = trim($_POST["content"]);
+    $price = trim($_POST["price"]);
+    $count = trim($_POST["count"]);
+    $category_id = trim($_POST["category_id"]);
+    
+    $sqlInsert = $mysqli->query("INSERT INTO `products` (id,`product`,`description`,`content`,`price`,`count`,`category_id`) 
+    VALUES (NULL,'$name','$description','$content','$price','$count','$category_id')");
+
+    echo "success_add";
+
+    // Закрытие подлючения
+    echo $mysqli->close;
+}
+
+if(isset($_POST["delete_product"])){
+
+    // Product
+    $products = $_POST["del_prod"];
+    $resultSQL;
+    $count = 0;
+    foreach ($products as $product) {
+        global $resultSQL;
+        global $count;
+        if($count == 0){
+            $or = "";
+        } else {
+            $or = " OR ";
+        }
+        $resultSQL = $resultSQL . $or . "`id` = " . $product;
+        $count++;
+    }
+    $sqlInsert = $mysqli->query("DELETE FROM `products` WHERE $resultSQL");
+    echo "success_delete";
+
+    // Закрытие подлючения
+    echo $mysqli->close;
+}

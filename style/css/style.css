@@ -257,12 +257,15 @@ img {
     border-radius: 20px;
     background: #FFF;
     border: 2px solid rgba(26, 29, 30, 0.2);
-    padding: 10px 20px;
+    padding: 5px 20px;
     height: 40px;
     font-size: 16px;
     color: #1a1d1e !important; }
     .form input:focus, .form select:focus, .form textarea:focus {
       border: 2px solid #fdd733; }
+    .form input[type="checkbox"], .form select[type="checkbox"], .form textarea[type="checkbox"] {
+      width: 20px;
+      height: 20px; }
   .form textarea {
     height: 100px;
     padding: 20px;
@@ -288,5 +291,27 @@ img {
   max-height: 100px;
   margin: 0 auto;
   display: block; }
+
+.productsTable, .usersTable {
+  width: 100%; }
+  .productsTable td, .usersTable td {
+    padding: 5px 10px; }
+  .productsTable .grayRow, .usersTable .grayRow {
+    background: rgba(0, 0, 0, 0.1); }
+  .productsTable .titleRow td, .usersTable .titleRow td {
+    padding-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold; }
+
+.borderRow {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  margin-bottom: 5px; }
+
+.productRow {
+  padding: 5px 0; }
 
 /*# sourceMappingURL=style.css.map */

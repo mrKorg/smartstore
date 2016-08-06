@@ -5,7 +5,7 @@
     <p class="form_text message" style="display: none;"></p>
     <p><input type="text" placeholder="Название товара" name="name" required></p>
     <p><textarea placeholder="Описание товара" name="description" required></textarea></p>
-    <p><textarea placeholder="Зарактеристики товара" name="content" required></textarea></p>
+    <p><textarea placeholder="Характеристики товара" name="content" required></textarea></p>
     <div class="row">
         <p class="col-xs-4"><input type="number" placeholder="Цена товара" name="price" required></p>
         <p class="col-xs-4"><input type="number" placeholder="Количество" name="count" required></p>

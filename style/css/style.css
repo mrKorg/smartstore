@@ -296,6 +296,9 @@ img {
   width: 100%; }
   .productsTable td, .usersTable td {
     padding: 5px 10px; }
+    .productsTable td a, .usersTable td a {
+      text-decoration: underline;
+      color: #845fe2; }
   .productsTable .grayRow, .usersTable .grayRow {
     background: rgba(0, 0, 0, 0.1); }
   .productsTable .titleRow td, .usersTable .titleRow td {

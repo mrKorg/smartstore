@@ -24,7 +24,7 @@ ON c.id = p.category_id");
         $count++; ?>
         <tr class="productRow <?php if($count%2 != 0){echo 'grayRow';} ?>">
             <td><?php echo $item['id']; ?></td>
-            <td><?php echo $item['product']; ?></td>
+            <td><a href="?page=edit_product&id=<?php echo $item['id']; ?>"><?php echo $item['product']; ?></a></td>
             <td><?php echo $item['category']; ?></td>
             <td><?php echo $item['description']; ?></td>
             <td><?php echo $item['content']; ?></td>

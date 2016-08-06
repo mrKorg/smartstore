@@ -36,7 +36,9 @@ include_once "../db.php"; ?>
                             include "users.php";
                         } else if($_GET["page"] == "delete_product"){
                             include "delete_product.php";
-                        } ?>
+                        } else if($_GET["page"] == "edit_product"){
+                            include "edit_product.php";
+                        }?>
                     </div>
                 </div>
             </div>

@@ -76,6 +76,16 @@ jQuery(document).ready(function ($) {
         });
         e.preventDefault();
     });
+    
+    $("#form-edit-prod").submit(function (e) {
+        var form = $(this).serializeArray();
+        $.post('../logic.php', form).done(function(result) {
+            if(result == "success_edit"){
+                window.location = "index.php?page=products";
+            }
+        });
+        e.preventDefault();
+    });
 
     $("#form-delete-prod").submit(function (e) {
         var form = $(this).serializeArray();

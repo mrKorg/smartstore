@@ -102,11 +102,32 @@ if(isset($_POST["add_product"])){
     $price = trim($_POST["price"]);
     $count = trim($_POST["count"]);
     $category_id = trim($_POST["category_id"]);
-    
+
     $sqlInsert = $mysqli->query("INSERT INTO `products` (id,`product`,`description`,`content`,`price`,`count`,`category_id`) 
     VALUES (NULL,'$name','$description','$content','$price','$count','$category_id')");
 
     echo "success_add";
+
+    // Закрытие подлючения
+    echo $mysqli->close;
+}
+
+if(isset($_POST["edit_product"])){
+
+    // Product
+    $id = trim($_POST["id"]);
+    $name = trim($_POST["name"]);
+    $description = trim($_POST["description"]);
+    $content = trim($_POST["content"]);
+    $price = trim($_POST["price"]);
+    $count = trim($_POST["count"]);
+    $category_id = trim($_POST["category_id"]);
+
+    $sqlInsert = $mysqli->query("UPDATE `products` 
+    SET product='$name', description='$description', content='$content', price='$price', count='$count', category_id='$category_id' 
+    WHERE id=$id ");
+
+    echo "success_edit";
 
     // Закрытие подлючения
     echo $mysqli->close;
